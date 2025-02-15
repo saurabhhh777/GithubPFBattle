@@ -6,8 +6,19 @@ const App = () => {
   const [formdata , setFormdata] = useState({
     mygithub:"",
     opponent:""
-
   });
+
+  const [firstdata,setFirstdata] = useState({
+    year:"",
+    commit:""
+  });
+
+  const [seconddata,setSeconddata] = useState({
+    year:"",
+    commit:""
+  });
+
+  
 
   // const [flag , setFlag] = useState(false);
 
@@ -27,11 +38,18 @@ const App = () => {
     try {
       const responseFirst = await axios.get(`${import.meta.env.VITE_REQUEST_URL}/${formdata.mygithub}`);
       console.log(`MyGit Data :`);
-      console.log(responseFirst.data);
+      console.log(responseFirst.data.total);
+      const dat = responseFirst.data.total;
+      dat.foreach((da)=>{
+        setFirstdata({})
+      })
       
       const responseSecond = await axios.get(`${import.meta.env.VITE_REQUEST_URL}/${formdata.opponent}`);
       console.log(`Opponent data : `);
-      console.log(responseSecond.data);
+      console.log(responseSecond.data.total);
+      const dat2 = responseSecond.data.total;
+      console.log(dat2);
+
       
     } catch (error) {
       console.log(error);
